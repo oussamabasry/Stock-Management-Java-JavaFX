@@ -1,6 +1,7 @@
 package com.stock.sales.dao;
 
 import com.stock.customer.dao.Customer;
+import com.stock.payment.dao.Payment;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ public class Sale {
     private double total;
     private Customer customer;
     private List<CommandLine> commandLines = new ArrayList<>();
+    private List<Payment> payments = new ArrayList<>();
 
     public Sale(long id, LocalDate date, Customer customer) {
         this.id = id;
@@ -34,6 +36,7 @@ public class Sale {
         commandLines.remove(commandLine);
     }
     private  void calculTotal(){
+        total = 0;
         for (CommandLine c : commandLines)
             total+= c.getSubtotal();
     }
@@ -52,6 +55,11 @@ public class Sale {
 
     public void setCommandLines(List<CommandLine> commandLines) {
         this.commandLines = commandLines;
+        calculTotal();
+    }
+
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
     }
 
     public long getId() {
@@ -72,6 +80,10 @@ public class Sale {
 
     public List<CommandLine> getCommandLines() {
         return commandLines;
+    }
+
+    public List<Payment> getPayments() {
+        return payments;
     }
 
     public void setId(long id) {

@@ -28,6 +28,7 @@ public class SalesManagementWindow {
     protected HBox actionsHBox = new HBox();
     protected Button saveButton = new Button("Add Sale");
     protected Button exitButton = new Button("Exit");
+    protected Button payButton = new Button("Pay");
     protected Button deleteSaleButton = new Button("Delete Sale");
     protected Button upDateSaleButton = new Button("Up Date Sale");
     protected HBox bodyHBox = new HBox();
@@ -126,7 +127,7 @@ public class SalesManagementWindow {
     }
 
     protected void addNodesToWindow() {
-        actionsHBox.getChildren().addAll(saveButton, upDateSaleButton, deleteSaleButton, exitButton);
+        actionsHBox.getChildren().addAll(saveButton, upDateSaleButton, deleteSaleButton, payButton, exitButton);
         root.getChildren().add(actionsHBox);
 
         numberSaleHBox.getChildren().addAll(numberSaleLabel, numberSaleTextField);
@@ -266,6 +267,9 @@ public class SalesManagementWindow {
         });
         saveButton.setOnAction(event -> {
             handler.addDelivery();
+        });
+        payButton.setOnAction(event -> {
+            handler.addPay();
         });
         exitButton.setOnAction(event ->{
             handler.exitDelivery();

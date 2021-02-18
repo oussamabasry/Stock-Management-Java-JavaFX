@@ -1,6 +1,7 @@
 package com.stock.sales.ihm;
 
 import com.stock.customer.dao.Customer;
+import com.stock.payment.ihm.PaymentWindow;
 import com.stock.product.dao.IProductDao;
 import com.stock.product.dao.Product;
 import com.stock.product.dao.ProductDaoImpl;
@@ -129,6 +130,17 @@ public class SaleManagementHandler {
         if(sale != null){
             new UpDateSaleWindow(sale, salesManagementWindow.handler);
         }
+    }
+
+    public  void addPay(){
+        Sale sale = salesManagementWindow.salesTableView.getSelectionModel().getSelectedItem();
+        ICommandLineDao commandLineDao = new CommandLineDaoImpl();
+        if(sale != null && salesManagementWindow.sale.getCommandLines().size() == 0)
+            sale.setCommandLines(commandLineDao.getAll(sale.getId()));
+        System.out.println(sale.getTotal());
+        System.out.println(sale.getTotal());
+            new PaymentWindow(sale);
+
     }
 
 }
