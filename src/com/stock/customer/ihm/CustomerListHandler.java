@@ -11,29 +11,27 @@ import java.util.List;
 public class CustomerListHandler {
     CustomerListWindow customerListWindow = null;
 
-    public CustomerListHandler(CustomerListWindow customerListWindow){
+    public CustomerListHandler(CustomerListWindow customerListWindow) {
         this.customerListWindow = customerListWindow;
     }
 
-
-    public  void updateListCustomersView(){
+    public void updateListCustomersView() {
         ICustomerDao customerDao = new CustomerDaoImpl();
         List<Customer> list = customerDao.getAll();
         customerListWindow.customerObservablesList.setAll(list);
         getTotalCustomers();
     }
 
-    public  void updateCustomerByKeyword(String keyword){
+    public void updateCustomerByKeyword(String keyword) {
         ICustomerDao customerDao = new CustomerDaoImpl();
         List<Customer> list = customerDao.getAll(keyword);
         customerListWindow.customerObservablesList.setAll(list);
         getTotalCustomers();
     }
 
-    public void getTotalCustomers(){
+    public void getTotalCustomers() {
         int count = 0;
-        for ( Customer c : customerListWindow.customerObservablesList) count++;
+        for (Customer c : customerListWindow.customerObservablesList) count++;
         customerListWindow.numberValueLabel.setText(String.valueOf(count));
     }
-
 }

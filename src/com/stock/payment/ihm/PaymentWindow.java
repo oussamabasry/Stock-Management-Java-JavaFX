@@ -1,13 +1,8 @@
 package com.stock.payment.ihm;
 
-import com.stock.customer.dao.Customer;
+
 import com.stock.payment.dao.Payment;
-import com.stock.product.dao.Product;
-import com.stock.sales.dao.CommandLine;
 import com.stock.sales.dao.Sale;
-import com.stock.sales.ihm.SaleManagementHandler;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -17,7 +12,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 import java.time.LocalDate;
 
@@ -35,47 +29,41 @@ public class PaymentWindow {
     protected HBox bodyHBox = new HBox();
     protected VBox leftVBox = new VBox();
     protected VBox rightVBox = new VBox();
-    protected  VBox saleDetailVBox = new VBox();
+    protected VBox saleDetailVBox = new VBox();
     protected Label saleDetailLabel = new Label("Sale Details");
 
 
-    protected  HBox customerHBox = new HBox();
+    protected HBox customerHBox = new HBox();
     protected Label customerLabel = new Label("Customer: ");
-    protected  Label customerNameLabel = new Label("");
+    protected Label customerNameLabel = new Label("");
 
-    protected  HBox dateHBox = new HBox();
+    protected HBox dateHBox = new HBox();
     protected Label dateLabel = new Label("Date: ");
-    protected  Label dateValueLabel = new Label("");
+    protected Label dateValueLabel = new Label("");
 
-    protected  HBox numberSaleHBox = new HBox();
+    protected HBox numberSaleHBox = new HBox();
     protected Label numberSaleLabel = new Label("N°Sale: ");
-    protected  Label numberSaleValueLabel = new Label("");
+    protected Label numberSaleValueLabel = new Label("");
 
-    protected  HBox totalSaleHBox = new HBox();
+    protected HBox totalSaleHBox = new HBox();
     protected Label totalSaleLabel = new Label("Total: ");
-    protected  Label totalSaleValueLabel = new Label();
+    protected Label totalSaleValueLabel = new Label();
 
-    protected  HBox totalPaidSaleHBox = new HBox();
+    protected HBox totalPaidSaleHBox = new HBox();
     protected Label totalPaidSaleLabel = new Label("Total Paid: ");
-    protected  Label totalPaidSaleValueLabel = new Label();
+    protected Label totalPaidSaleValueLabel = new Label();
 
-    protected  HBox restSaleHBox = new HBox();
+    protected HBox restSaleHBox = new HBox();
     protected Label restSaleLabel = new Label("Rest: ");
-    protected  Label restSaleValueLabel = new Label();
+    protected Label restSaleValueLabel = new Label();
 
-
-
-
-    protected  VBox paymentDetailsVBox = new VBox();
+    protected VBox paymentDetailsVBox = new VBox();
     protected Label paymentDetailsLabel = new Label("payment Details: ");
-    protected  HBox totalHBox = new HBox();
+    protected HBox totalHBox = new HBox();
     protected Label totalLabel = new Label("  Total: ");
     protected Label totalValueLabel = new Label("0,00");
 
-
-
-
-    protected  VBox tablepaymentVBox = new VBox();
+    protected VBox tablepaymentVBox = new VBox();
     protected TableView<Payment> paymentsTableView = new TableView<>();
     protected TableColumn<Payment, Long> paymentIdColumn = new TableColumn<>("ID");
     protected TableColumn<Payment, Double> paymentAmountColumn = new TableColumn<>("Amount");
@@ -84,7 +72,7 @@ public class PaymentWindow {
     protected TableColumn<Payment, Integer> paymentChequeNumberColumn = new TableColumn<>("N°Cheque");
     protected TableColumn<Payment, String> paymentOwnerColumn = new TableColumn<>("Owner");
     protected TableColumn<Payment, String> paymentBankColumn = new TableColumn<>("Bank");
-    protected ObservableList<Payment> paymentsObservablesList =  FXCollections.observableArrayList();
+    protected ObservableList<Payment> paymentsObservablesList = FXCollections.observableArrayList();
 
     protected Label paymentDateLabel = new Label("Date: ");
     protected DatePicker paymentDatePicker = new DatePicker();
@@ -101,32 +89,25 @@ public class PaymentWindow {
     ChoiceBox cbBank = new ChoiceBox(FXCollections.observableArrayList(
             "Attijari", "CIH", "Societé generale")
     );
-    protected  Label nameLabel = new Label("Name");
+    protected Label nameLabel = new Label("Name");
     protected TextField nameTextField = new TextField();
 
     protected Button savePaymentButton = new Button("Save");
 
     protected Button upDatePaymentButton = new Button("UpDate payment");
 
+    protected Label accountNumberLabel = new Label("Account Number");
+    protected TextField accountNumberTextField = new TextField();
 
-
-    protected ObservableList<CommandLine> commandLinesObservablesList =  FXCollections.observableArrayList();
-
-    protected Sale sale = new Sale();// vente
-    protected  double total;
-
-
-
-
-
-    Customer customer;
+    protected Sale sale = new Sale();
+    protected double total;
 
 
     protected void initWindow() {
         window.setScene(scene);
         window.setWidth(1400);
         window.setHeight(700);
-        window.setTitle("Sales");
+        window.setTitle("Payments");
         paymentsTableView.setEditable(true);
     }
 
@@ -140,7 +121,15 @@ public class PaymentWindow {
         totalSaleHBox.getChildren().addAll(totalSaleLabel, totalSaleValueLabel);
         totalPaidSaleHBox.getChildren().addAll(totalPaidSaleLabel, totalPaidSaleValueLabel);
         restSaleHBox.getChildren().addAll(restSaleLabel, restSaleValueLabel);
-        saleDetailVBox.getChildren().addAll(saleDetailLabel, customerHBox, numberSaleHBox, dateHBox, totalSaleHBox, totalPaidSaleHBox, restSaleHBox);
+        saleDetailVBox.getChildren().addAll(
+                saleDetailLabel,
+                customerHBox,
+                numberSaleHBox,
+                dateHBox,
+                totalSaleHBox,
+                totalPaidSaleHBox,
+                restSaleHBox
+        );
 
         totalHBox.getChildren().addAll(totalLabel, totalValueLabel);
         paymentDetailsVBox.getChildren().addAll(
@@ -154,24 +143,17 @@ public class PaymentWindow {
                 savePaymentButton
         );
 
-
-
-
         tablepaymentVBox.getChildren().add(paymentsTableView);
-
 
         rightVBox.getChildren().addAll(paymentDetailsVBox);
         leftVBox.getChildren().addAll(saleDetailVBox, tablepaymentVBox);
-
 
         bodyHBox.getChildren().addAll(leftVBox, rightVBox);
         root.getChildren().add(bodyHBox);
 
     }
 
-
-
-    protected   void addColumnToProductTableview(){
+    protected void addColumnToPaymentsTableview() {
         paymentsTableView.getColumns().addAll(
                 paymentIdColumn,
                 paymentAmountColumn,
@@ -192,24 +174,20 @@ public class PaymentWindow {
         saleDetailVBox.getStyleClass().add("box");
         saleDetailVBox.setSpacing(10);
         saleDetailVBox.setPadding(new Insets(10, 10, 10, 10));
-        saleDetailVBox.setMinWidth(window.getWidth() /1.8);
+        saleDetailVBox.setMinWidth(window.getWidth() / 1.8);
         saleDetailLabel.getStyleClass().add("labelTitle");
-        saleDetailLabel.setMinWidth(window.getWidth()/2.6);
-        saleDetailLabel.setPadding(new Insets(15,15,15,15));
+        saleDetailLabel.setMinWidth(window.getWidth() / 2.6);
+        saleDetailLabel.setPadding(new Insets(15, 15, 15, 15));
 
         bodyHBox.setSpacing(20);
 
-
-
         paymentDetailsLabel.getStyleClass().add("labelTitle");
         paymentDetailsVBox.getStyleClass().add("box");
-        paymentDetailsLabel.setMinWidth(window.getWidth() /3);
+        paymentDetailsLabel.setMinWidth(window.getWidth() / 3);
         paymentDetailsLabel.setPadding(new Insets(15, 15, 15, 15));
-        paymentDetailsVBox.setMinWidth(window.getWidth() /3);
+        paymentDetailsVBox.setMinWidth(window.getWidth() / 3);
         paymentDetailsVBox.setPadding(new Insets(15, 15, 15, 15));
         paymentDetailsVBox.setSpacing(10);
-
-
 
         totalLabel.getStyleClass().add("totalLabel");
         totalValueLabel.getStyleClass().add("totalLabel");
@@ -218,38 +196,39 @@ public class PaymentWindow {
 
         root.setSpacing(30);
         root.setPadding(new Insets(20, 20, 20, 20));
-
     }
-public  void clearContainers(){
-    root.getChildren().clear();
-    actionsHBox.getChildren().clear();
-    numberSaleHBox.getChildren().clear();
-    customerHBox.getChildren().clear();
-    dateHBox.getChildren().clear();
-    totalSaleHBox.getChildren().clear();
-    totalPaidSaleHBox.getChildren().clear();
-    restSaleHBox.getChildren().clear();
-    saleDetailVBox.getChildren().clear();
-    totalHBox.getChildren().clear();
-    paymentDetailsVBox.getChildren().clear();
-    tablepaymentVBox.getChildren().clear();
-    rightVBox.getChildren().clear();
-    leftVBox.getChildren().clear();
-    bodyHBox.getChildren().clear();
-    root.getChildren().clear();
-    paymentAmountTextField.setText("");
-    paymentDatePicker.setValue(LocalDate.now());
-}
+
+    public void clearContainers() {
+        root.getChildren().clear();
+        actionsHBox.getChildren().clear();
+        numberSaleHBox.getChildren().clear();
+        customerHBox.getChildren().clear();
+        dateHBox.getChildren().clear();
+        totalSaleHBox.getChildren().clear();
+        totalPaidSaleHBox.getChildren().clear();
+        restSaleHBox.getChildren().clear();
+        saleDetailVBox.getChildren().clear();
+        totalHBox.getChildren().clear();
+        paymentDetailsVBox.getChildren().clear();
+        tablepaymentVBox.getChildren().clear();
+        rightVBox.getChildren().clear();
+        leftVBox.getChildren().clear();
+        bodyHBox.getChildren().clear();
+        root.getChildren().clear();
+        paymentAmountTextField.setText("");
+        paymentDatePicker.setValue(LocalDate.now());
+    }
+
     protected void addEvents() {
 
         addNewPaymentButton.setOnAction(event -> {
+            cbType.setValue("Cash");
             clearContainers();
             addNodesToWindow();
         });
 
-
         cbType.setOnAction(event -> {
-           handler.displayCheque();
+            handler.displayCheque();
         });
         savePaymentButton.setOnAction(event -> {
             handler.addPayment();
@@ -263,20 +242,12 @@ public  void clearContainers(){
         deletePaymentButton.setOnAction(event -> {
             handler.deletePayment();
         });
-
     }
 
-
-
-
-
-
-
-    public void configProductTableView() {
-
+    public void configPaymentsTableView() {
         paymentIdColumn.setCellValueFactory(new PropertyValueFactory<Payment, Long>("id"));
         paymentIdColumn.setPrefWidth(60);
-        paymentAmountColumn.setCellValueFactory(new PropertyValueFactory<Payment,Double>("amount"));
+        paymentAmountColumn.setCellValueFactory(new PropertyValueFactory<Payment, Double>("amount"));
         paymentAmountColumn.setPrefWidth(140);
         paymentDateColumn.setCellValueFactory(new PropertyValueFactory<Payment, LocalDate>("date"));
         paymentDateColumn.setPrefWidth(140);
@@ -288,9 +259,7 @@ public  void clearContainers(){
         paymentOwnerColumn.setPrefWidth(140);
         paymentBankColumn.setCellValueFactory(new PropertyValueFactory<Payment, String>("bank"));
         paymentBankColumn.setPrefWidth(120);
-
     }
-
 
     public PaymentWindow(Sale sale) {
         this.sale = sale;
@@ -305,8 +274,8 @@ public  void clearContainers(){
         paymentDatePicker.setValue(LocalDate.now());
         initWindow();
         addStylesToNodes();
-        addColumnToProductTableview();
-        configProductTableView();
+        addColumnToPaymentsTableview();
+        configPaymentsTableView();
         addNodesToWindow();
         addEvents();
         window.show();

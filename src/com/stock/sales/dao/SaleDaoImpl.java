@@ -34,7 +34,7 @@ public class SaleDaoImpl extends AbstractDao implements ISale {
         String sql = "insert into deliverySheet (deliveryDate) values (?)";
         PreparedStatement pst;
         try {
-            pst =  connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pst.setDate(1, null);
             pst.execute();
             ResultSet rs = pst.getGeneratedKeys();
@@ -107,13 +107,11 @@ public class SaleDaoImpl extends AbstractDao implements ISale {
     }
 
     public List<Sale> getAll(long idCustomer) {
-
         List<Sale> sales = new ArrayList<>();
         PreparedStatement pst;
         ResultSet rs;
         Sale deliverySheet;
         Customer customer;
-
         String sql = "SELECT * FROM deliverySheet LEFT JOIN customer c on deliverySheet.customerId = c.id where deliverySheet.customerId = ?";
 
         try {
@@ -128,10 +126,6 @@ public class SaleDaoImpl extends AbstractDao implements ISale {
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-
         return sales;
     }
-
-
-
 }

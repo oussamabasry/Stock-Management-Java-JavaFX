@@ -6,10 +6,11 @@ import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 
 public class CategoryProductsWindow extends ProductsListWindow {
-    Category category ;
-    public  CategoryProductsWindow(Category category){
+    Category category;
+
+    public CategoryProductsWindow(Category category) {
         this.category = category;
-        titleLabel.setText("Products of "+category.getTitle()+" category");
+        titleLabel.setText("Products of " + category.getTitle() + " category");
         handler.updateListProductsViewByCategory(category.getTitle());
         titleLabel.getStyleClass().add("labelTitle");
         titleLabel.setPadding(new Insets(20, 20, 20, 20));
@@ -25,11 +26,6 @@ public class CategoryProductsWindow extends ProductsListWindow {
         root.setPadding(new Insets(20, 20, 20, 20));
     }
 
-
-    public  void updateListProductsViewCategory(){
-       // productsObservablesList = FXCollections.observableArrayList(productDAO.getAllByCategory(category.getTitle()));
-      //  productsTableView.setItems(productsObservablesList);
-    }
     @Override
     protected void addStylesToNodes() {
         scene.getStylesheets().add("css/styles.css");
@@ -49,21 +45,18 @@ public class CategoryProductsWindow extends ProductsListWindow {
                 productsTableView.setItems(productsObservablesList);
             }
         });
-
         displayAllProductsButton.setOnAction(event -> handler.updateListProductsViewByCategory(category.getTitle()));
-
         deleteProductsButton.setOnAction(event -> {
             Product product = productsTableView.getSelectionModel().getSelectedItem();
-            if(product != null) {
+            if (product != null) {
                 productDAO.delete(product.getId());
                 handler.updateListProductsViewByCategory(category.getTitle());
             }
         });
-
         upDateProductsButton.setOnAction(event -> {
             Product product = productsTableView.getSelectionModel().getSelectedItem();
-            if(product != null) {
-                new productUpdateFormWindow(product,category.getTitle(),handler);
+            if (product != null) {
+                new productUpdateFormWindow(product, category.getTitle(), handler);
             }
         });
     }

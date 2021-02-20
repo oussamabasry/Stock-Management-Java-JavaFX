@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 public class MainWindow extends Application {
     private final BorderPane root = new BorderPane();
     private final Scene scene = new Scene(root);
-
     MenuItem addProductMenuItem = new MenuItem("New Product");
     MenuItem listProductsMenuItem = new MenuItem("List Products");
     MenuItem addCategoryMenuItem = new MenuItem("New Category");
@@ -30,7 +29,6 @@ public class MainWindow extends Application {
 
     private void createMenu() {
         MenuBar menuBar = new MenuBar();
-
         Menu productMenu = new Menu("Products");
         Menu customerMenu = new Menu("Customers");
         Menu saleMenu = new Menu("Sales");
@@ -38,13 +36,10 @@ public class MainWindow extends Application {
         Menu inventoryMenu = new Menu("Inventory");
         Menu helpMenu = new Menu("Help");
         menuBar.getMenus().addAll(productMenu, customerMenu, saleMenu, paymentMenu, inventoryMenu, helpMenu);
-
-
         productMenu.getItems().addAll(addProductMenuItem, listProductsMenuItem, addCategoryMenuItem, listCategoriesMenuItem);
         customerMenu.getItems().addAll(addCustomerMenuItem, listCustomerMenuItem);
         saleMenu.getItems().addAll(salesHomeMenuItem);
         helpMenu.getItems().addAll(helpMenuItem);
-
         root.setTop(menuBar);
     }
 
@@ -63,6 +58,7 @@ public class MainWindow extends Application {
         salesHomeMenuItem.setOnAction(event -> new SaleHomeWindow());
     }
 
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -77,6 +73,5 @@ public class MainWindow extends Application {
         window.setWidth(1100);
         window.setHeight(650);
         window.show();
-
     }
 }

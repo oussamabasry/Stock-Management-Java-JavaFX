@@ -5,11 +5,11 @@ import com.stock.sales.dao.Sale;
 import java.time.LocalDate;
 
 public class Payment {
- protected long id;
- protected double amount;
- protected LocalDate date;
- protected String type;
- protected Sale sale;
+    protected long id;
+    protected double amount;
+    protected LocalDate date;
+    protected String type;
+    protected Sale sale;
 
     public Payment(long id, double amount, LocalDate date, String type, Sale sale) {
         this.id = id;

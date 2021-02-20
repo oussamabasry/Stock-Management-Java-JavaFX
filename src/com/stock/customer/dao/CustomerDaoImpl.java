@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerDaoImpl extends AbstractDao implements ICustomerDao{
+public class CustomerDaoImpl extends AbstractDao implements ICustomerDao {
     @Override
     public void add(Customer customer) {
         PreparedStatement pst;
@@ -65,8 +65,6 @@ public class CustomerDaoImpl extends AbstractDao implements ICustomerDao{
         PreparedStatement pst;
         ResultSet rs;
         Customer customer = null;
-
-
         String sql = "SELECT * FROM customer where customer.id = ?";
 
         try {
@@ -89,7 +87,6 @@ public class CustomerDaoImpl extends AbstractDao implements ICustomerDao{
         PreparedStatement pst;
         ResultSet rs;
         Customer customer;
-
         String sql = "SELECT * FROM customer";
         try {
             pst = connection.prepareStatement(sql);
@@ -110,9 +107,7 @@ public class CustomerDaoImpl extends AbstractDao implements ICustomerDao{
         PreparedStatement pst;
         ResultSet rs;
         Customer customer;
-
         String sql = "SELECT * FROM customer  where customer.firstName LIKE ? Or customer.lastName Like ? ";
-
         try {
             pst = connection.prepareStatement(sql);
             pst.setString(1, "%" + keyword + "%");
@@ -125,10 +120,6 @@ public class CustomerDaoImpl extends AbstractDao implements ICustomerDao{
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-
         return customers;
     }
-
-
-
 }

@@ -21,7 +21,7 @@ public class CustomerAddFormWindow {
     protected ICategoryDao categoryDao = new CategoryDaoImpl();
     private CustomerAddHandler handler = new CustomerAddHandler(this);
     protected ProductsListWindow productsListWindow = ProductsListHandler.getListHandler();
-    protected  VBox root = new VBox();
+    protected VBox root = new VBox();
     protected Scene scene = new Scene(root);
     protected Stage window = new Stage();
     protected Label titleLabel = new Label("  New Customer");
@@ -40,13 +40,11 @@ public class CustomerAddFormWindow {
     protected Button cancelButton = new Button("Cancel");
     protected ObservableList<Customer> customerObservableList = FXCollections.observableArrayList();
 
-
     protected void initWindow() {
         window.setScene(scene);
         window.setWidth(600);
         window.setHeight(530);
         window.setTitle("New Product");
-
     }
 
     protected void addNodesToWindow() {
@@ -94,12 +92,7 @@ public class CustomerAddFormWindow {
             }
 
         });
-      /*  window.setOnCloseRequest(event -> {
-            event.consume();
-        });*/
     }
-
-
 
     public CustomerAddFormWindow() {
         initWindow();

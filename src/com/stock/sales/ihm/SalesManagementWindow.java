@@ -20,7 +20,6 @@ import javafx.util.Callback;
 import java.time.LocalDate;
 
 public class SalesManagementWindow {
-
     protected SaleManagementHandler handler = new SaleManagementHandler(this);
     protected VBox root = new VBox();
     protected Scene scene = new Scene(root);
@@ -34,23 +33,20 @@ public class SalesManagementWindow {
     protected HBox bodyHBox = new HBox();
     protected VBox leftVBox = new VBox();
     protected VBox rightVBox = new VBox();
-    protected  VBox saleDetailVBox = new VBox();
+    protected VBox saleDetailVBox = new VBox();
     protected Label saleDetailLabel = new Label("Sale Details");
-    protected  HBox numberSaleHBox = new HBox();
+    protected HBox numberSaleHBox = new HBox();
     protected Label numberSaleLabel = new Label("N°Sale: ");
-    protected  TextField numberSaleTextField = new TextField();
-    protected  HBox customerHBox = new HBox();
+    protected TextField numberSaleTextField = new TextField();
+    protected HBox customerHBox = new HBox();
     protected Label customerLabel = new Label("Customer: ");
-    protected  Label customerNameLabel = new Label("");
-    protected  HBox dateHBox = new HBox();
+    protected Label customerNameLabel = new Label("");
+    protected HBox dateHBox = new HBox();
     protected Label dateLabel = new Label("Date:    ");
     protected DatePicker dateDatePicker = new DatePicker();
-
-    protected  HBox commandLineContainerHBox = new HBox();
-    protected  VBox commandLineInfosVBox = new VBox();
+    protected HBox commandLineContainerHBox = new HBox();
+    protected VBox commandLineInfosVBox = new VBox();
     protected HBox commandLineActionsHBox = new HBox();
-
-    // command line infos
     protected HBox idProductHBox = new HBox();
     protected Label idProductLabel = new Label("ID:               ");
     protected TextField idProductTextField = new TextField();
@@ -63,60 +59,37 @@ public class SalesManagementWindow {
     protected HBox quantityProductHBox = new HBox();
     protected Label quantityProductLabel = new Label("Quantity:    ");
     protected TextField quantityProductTextField = new TextField();
-    // command line actions
     protected Button addCommandLineButton = new Button("+");
     protected Button deleteCommandLineButton = new Button("-");
-
-    protected  VBox listSalesVBox = new VBox();
+    protected VBox listSalesVBox = new VBox();
     protected Label listSalesLabel = new Label("List of Sales: ");
-    protected  HBox totalHBox = new HBox();
+    protected HBox totalHBox = new HBox();
     protected Label totalLabel = new Label("  Total: ");
     protected Label totalValueLabel = new Label("0,00");
-
-
-
-
-
-
-
     protected Label blTableLabel = new Label("Sales");
-    protected  VBox tableBlVBox = new VBox();
+    protected VBox tableBlVBox = new VBox();
     protected TableView<Sale> salesTableView = new TableView<>();
     protected TableColumn<Sale, Long> saleIdColumn = new TableColumn<>("ID");
     protected TableColumn<Sale, String> saleDateColumn = new TableColumn<>("Date");
     protected TableColumn<Sale, String> saleCustomerColumn = new TableColumn<>("Customer");
-    protected ObservableList<Sale> salesObservablesList =  FXCollections.observableArrayList();
-
-
-
-
-
-    protected  VBox tableProductsVBox = new VBox();
+    protected ObservableList<Sale> salesObservablesList = FXCollections.observableArrayList();
+    protected VBox tableProductsVBox = new VBox();
     protected TableView<Product> productsTableView = new TableView<>();
     protected TableColumn<Product, Long> productIdColumn = new TableColumn<>("ID");
     protected TableColumn<Product, String> productDesignationColumn = new TableColumn<>("Designation");
     protected TableColumn<Product, Double> productPriceColumn = new TableColumn<>("Price");
-    protected ObservableList<Product> productsObservablesList =  FXCollections.observableArrayList();
-
-    protected  VBox tableCommandLineVBox = new VBox();
+    protected ObservableList<Product> productsObservablesList = FXCollections.observableArrayList();
     protected TableView<CommandLine> commandLineTableView = new TableView<>();
     protected TableColumn<CommandLine, Long> commandLineIdColumn = new TableColumn<>("ID");
     protected TableColumn<CommandLine, String> commandLineDesignationColumn = new TableColumn<>("Designation");
     protected TableColumn<CommandLine, Double> commandLinePriceColumn = new TableColumn<>("Price");
     protected TableColumn<CommandLine, Integer> commandLineQuantityColumn = new TableColumn<>("Quantity");
     protected TableColumn<CommandLine, Double> commandLineSubtotalColumn = new TableColumn<>("Subtotal");
-
-    protected ObservableList<CommandLine> commandLinesObservablesList =  FXCollections.observableArrayList();
-
-    protected Sale sale = new Sale();// vente
-
-
-    protected  VBox commandLineTableVBox = new VBox();
+    protected ObservableList<CommandLine> commandLinesObservablesList = FXCollections.observableArrayList();
+    protected Sale sale = new Sale();
+    protected VBox commandLineTableVBox = new VBox();
     protected Label commandLineTableLabel = new Label("Command lines");
-
-
     Customer customer;
-
 
     protected void initWindow() {
         window.setScene(scene);
@@ -129,40 +102,28 @@ public class SalesManagementWindow {
     protected void addNodesToWindow() {
         actionsHBox.getChildren().addAll(saveButton, upDateSaleButton, deleteSaleButton, payButton, exitButton);
         root.getChildren().add(actionsHBox);
-
         numberSaleHBox.getChildren().addAll(numberSaleLabel, numberSaleTextField);
         customerHBox.getChildren().addAll(customerLabel, customerNameLabel);
         dateHBox.getChildren().addAll(dateLabel, dateDatePicker);
         saleDetailVBox.getChildren().addAll(saleDetailLabel, numberSaleHBox, customerHBox, dateHBox);
-
         totalHBox.getChildren().addAll(totalLabel, totalValueLabel);
         listSalesVBox.getChildren().addAll(listSalesLabel, salesTableView);
-
         idProductHBox.getChildren().addAll(idProductLabel, idProductTextField);
         designProductHBox.getChildren().addAll(designProductLabel, designProductTextField);
         priceProductHBox.getChildren().addAll(priceProductLabel, priceProductTextField);
         quantityProductHBox.getChildren().addAll(quantityProductLabel, quantityProductTextField);
-
         commandLineInfosVBox.getChildren().addAll(idProductHBox, designProductHBox, priceProductHBox, quantityProductHBox);
-        commandLineActionsHBox.getChildren().addAll(addCommandLineButton, deleteCommandLineButton );
-
+        commandLineActionsHBox.getChildren().addAll(addCommandLineButton, deleteCommandLineButton);
         commandLineContainerHBox.getChildren().addAll(commandLineInfosVBox, commandLineActionsHBox);
-
-        commandLineTableVBox.getChildren().addAll(commandLineTableLabel,totalHBox,commandLineTableView);
-
+        commandLineTableVBox.getChildren().addAll(commandLineTableLabel, totalHBox, commandLineTableView);
         tableProductsVBox.getChildren().add(productsTableView);
-
-
         rightVBox.getChildren().addAll(listSalesVBox, commandLineTableVBox);
         leftVBox.getChildren().addAll(saleDetailVBox, commandLineContainerHBox, tableProductsVBox);
-
-
         bodyHBox.getChildren().addAll(leftVBox, rightVBox);
         root.getChildren().add(bodyHBox);
-
     }
 
-    protected   void addColumnToBlTableview(){
+    protected void addColumnToBlTableview() {
         salesTableView.getColumns().addAll(
                 saleIdColumn,
                 saleDateColumn,
@@ -171,7 +132,7 @@ public class SalesManagementWindow {
         salesTableView.setItems(salesObservablesList);
     }
 
-    protected   void addColumnToProductTableview(){
+    protected void addColumnToProductTableview() {
         productsTableView.getColumns().addAll(
                 productIdColumn,
                 productDesignationColumn,
@@ -180,7 +141,7 @@ public class SalesManagementWindow {
         productsTableView.setItems(productsObservablesList);
     }
 
-    protected   void addColumnToCommandLineTableview(){
+    protected void addColumnToCommandLineTableview() {
         commandLineTableView.getColumns().addAll(
                 commandLineIdColumn,
                 commandLineDesignationColumn,
@@ -197,11 +158,10 @@ public class SalesManagementWindow {
         saleDetailVBox.getStyleClass().add("box");
         saleDetailVBox.setSpacing(10);
         saleDetailVBox.setPadding(new Insets(10, 10, 10, 10));
-        saleDetailVBox.setMinWidth(window.getWidth() /2.5);
+        saleDetailVBox.setMinWidth(window.getWidth() / 2.5);
         saleDetailLabel.getStyleClass().add("labelTitle");
-        saleDetailLabel.setMinWidth(window.getWidth()/2.6);
-        saleDetailLabel.setPadding(new Insets(15,15,15,15));
-
+        saleDetailLabel.setMinWidth(window.getWidth() / 2.6);
+        saleDetailLabel.setPadding(new Insets(15, 15, 15, 15));
         numberSaleTextField.setEditable(false);
         numberSaleTextField.setDisable(true);
         idProductTextField.setEditable(false);
@@ -210,37 +170,29 @@ public class SalesManagementWindow {
         designProductTextField.setDisable(true);
         priceProductTextField.setEditable(false);
         priceProductTextField.setDisable(true);
-
         commandLineContainerHBox.getStyleClass().add("box");
         commandLineContainerHBox.setSpacing(10);
         commandLineContainerHBox.setPadding(new Insets(10, 10, 10, 10));
-        commandLineContainerHBox.setMinWidth(window.getWidth() /2.5);
-
+        commandLineContainerHBox.setMinWidth(window.getWidth() / 2.5);
         commandLineActionsHBox.setSpacing(30);
         commandLineActionsHBox.setPadding(new Insets(0, 25, 0, 25));
         addCommandLineButton.getStyleClass().addAll("commandLineButton");
         deleteCommandLineButton.getStyleClass().addAll("commandLineButton");
-
         listSalesLabel.getStyleClass().add("labelTitle");
         listSalesVBox.getStyleClass().add("box");
-        listSalesLabel.setMinWidth(window.getWidth() /1.8);
+        listSalesLabel.setMinWidth(window.getWidth() / 1.8);
         listSalesLabel.setPadding(new Insets(15, 15, 15, 15));
         listSalesVBox.setSpacing(10);
-
         commandLineTableLabel.getStyleClass().add("labelTitle");
         commandLineTableVBox.getStyleClass().add("box");
-        commandLineTableLabel.setMinWidth(window.getWidth() /1.8);
+        commandLineTableLabel.setMinWidth(window.getWidth() / 1.8);
         commandLineTableLabel.setPadding(new Insets(15, 15, 15, 15));
         commandLineTableVBox.setSpacing(10);
-
         totalLabel.getStyleClass().add("totalLabel");
         totalValueLabel.getStyleClass().add("totalLabel");
-
         leftVBox.setSpacing(20);
-
         root.setSpacing(30);
         root.setPadding(new Insets(20, 20, 20, 20));
-
     }
 
     protected void addEvents() {
@@ -271,78 +223,63 @@ public class SalesManagementWindow {
         payButton.setOnAction(event -> {
             handler.addPay();
         });
-        exitButton.setOnAction(event ->{
+        exitButton.setOnAction(event -> {
             handler.exitDelivery();
         });
     }
 
-
-
     public void configBlTableView() {
-
         saleIdColumn.setCellValueFactory(new PropertyValueFactory<Sale, Long>("id"));
         saleIdColumn.setPrefWidth(140);
-        saleDateColumn.setCellValueFactory(new PropertyValueFactory<Sale,String>("date"));
+        saleDateColumn.setCellValueFactory(new PropertyValueFactory<Sale, String>("date"));
         saleDateColumn.setPrefWidth(200);
-        saleCustomerColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Sale , String>, ObservableValue<String>>() {
-
+        saleCustomerColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Sale, String>, ObservableValue<String>>() {
             @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Sale , String> param) {
-                return new SimpleObjectProperty<>(param.getValue().getCustomer().getFirstName()+" "+param.getValue().getCustomer().getLastName());
-
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Sale, String> param) {
+                return new SimpleObjectProperty<>(param.getValue().getCustomer().getFirstName() + " " + param.getValue().getCustomer().getLastName());
             }
         });
-
         saleCustomerColumn.setPrefWidth(200);
     }
 
-
-
     public void configProductTableView() {
-
         productIdColumn.setCellValueFactory(new PropertyValueFactory<Product, Long>("id"));
         productIdColumn.setPrefWidth(140);
-        productDesignationColumn.setCellValueFactory(new PropertyValueFactory<Product,String>("designation"));
+        productDesignationColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("designation"));
         productDesignationColumn.setPrefWidth(200);
         productPriceColumn.setCellValueFactory(new PropertyValueFactory<Product, Double>("price"));
         productPriceColumn.setPrefWidth(200);
     }
+
     public void configCommandLineTableView() {
-
         commandLineIdColumn.setCellValueFactory(new PropertyValueFactory<CommandLine, Long>("id"));
-        commandLineIdColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CommandLine , Long>, ObservableValue<Long>>() {
-
+        commandLineIdColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CommandLine, Long>, ObservableValue<Long>>() {
             @Override
-            public ObservableValue<Long> call(TableColumn.CellDataFeatures<CommandLine , Long> param) {
+            public ObservableValue<Long> call(TableColumn.CellDataFeatures<CommandLine, Long> param) {
                 return new SimpleObjectProperty<>(param.getValue().getProduct().getId());
-
             }
         });
         commandLineIdColumn.setPrefWidth(100);
-        commandLineDesignationColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CommandLine , String>, ObservableValue<String>>() {
+        commandLineDesignationColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CommandLine, String>, ObservableValue<String>>() {
 
             @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<CommandLine , String> param) {
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<CommandLine, String> param) {
                 return new SimpleObjectProperty<>(param.getValue().getProduct().getDesignation());
-
             }
         });
         commandLineDesignationColumn.setPrefWidth(200);
-        commandLinePriceColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CommandLine , Double>, ObservableValue<Double>>() {
-
+        commandLinePriceColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CommandLine, Double>, ObservableValue<Double>>() {
             @Override
-            public ObservableValue<Double> call(TableColumn.CellDataFeatures<CommandLine , Double> param) {
+            public ObservableValue<Double> call(TableColumn.CellDataFeatures<CommandLine, Double> param) {
                 return new SimpleObjectProperty<>(param.getValue().getProduct().getPrice());
-
             }
         });
         commandLinePriceColumn.setPrefWidth(150);
-        commandLineQuantityColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CommandLine , Integer>, ObservableValue<Integer>>() {
+        commandLineQuantityColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<CommandLine, Integer>, ObservableValue<Integer>>() {
 
             @Override
-            public ObservableValue<Integer> call(TableColumn.CellDataFeatures<CommandLine , Integer> param) {
+            public ObservableValue<Integer> call(TableColumn.CellDataFeatures<CommandLine, Integer> param) {
                 return new SimpleObjectProperty<>(param.getValue().getQuantity());
-
             }
         });
         commandLineQuantityColumn.setPrefWidth(150);
@@ -350,11 +287,8 @@ public class SalesManagementWindow {
         commandLineSubtotalColumn.setPrefWidth(150);
     }
 
-
     public SalesManagementWindow(Customer customer) {
         handler.getDeliveryIdFromDB();
-
-
         this.customer = customer;
         customerNameLabel.setText(this.customer.getFirstName() + " " + this.customer.getLastName());
         dateDatePicker.setValue(LocalDate.now());

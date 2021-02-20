@@ -33,7 +33,6 @@ public class CategoryListWindow {
     private TableColumn<Category, String> categoryTitleTableColumn = new TableColumn<>("Title");
     ObservableList<Category> data;
 
-
     private void initWindow() {
         window.setScene(scene);
         window.setWidth(800);
@@ -77,37 +76,37 @@ public class CategoryListWindow {
         displayAllCategoriesButton.setOnAction(event -> this.updateListProductsView());
         deleteCategoryButton.setOnAction(event -> {
             Category category = categoriesListTableView.getSelectionModel().getSelectedItem();
-            if(category != null) {
+            if (category != null) {
                 categoryDao.delete(category.getId());
                 this.updateListProductsView();
             }
         });
         upDateCategoryButton.setOnAction(event -> {
             Category category = categoriesListTableView.getSelectionModel().getSelectedItem();
-            if(category != null) {
-               CategoryUpdateFormWindow categoryUpdateFormWindow = new CategoryUpdateFormWindow(category, data, categoriesListTableView);
+            if (category != null) {
+                CategoryUpdateFormWindow categoryUpdateFormWindow = new CategoryUpdateFormWindow(category, data, categoriesListTableView);
                 this.updateListProductsView();
             }
         });
         displayProductsButton.setOnAction(event -> {
             Category category = categoriesListTableView.getSelectionModel().getSelectedItem();
-            if(category != null) {
+            if (category != null) {
                 CategoryProductsWindow categoryProductsWindow = new CategoryProductsWindow(category);
             }
         });
     }
-    public  void updateListProductsView(){
+
+    public void updateListProductsView() {
         data = FXCollections.observableArrayList(categoryDao.getAll());
         categoriesListTableView.setItems(data);
     }
-    public void configTableView() {
 
+    public void configTableView() {
         double width = window.getWidth() - 50;
         categoryIdTableColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         categoryIdTableColumn.setMinWidth(width / 2);
         categoryTitleTableColumn.setCellValueFactory(new PropertyValueFactory<>("Title"));
         categoryTitleTableColumn.setMinWidth(width / 2);
-
         this.updateListProductsView();
     }
 
@@ -119,5 +118,4 @@ public class CategoryListWindow {
         addEvents();
         window.show();
     }
-
 }

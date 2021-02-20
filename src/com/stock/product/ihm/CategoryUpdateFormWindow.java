@@ -5,12 +5,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 
-public class CategoryUpdateFormWindow extends  CategoryAddFormWindow{
+public class CategoryUpdateFormWindow extends CategoryAddFormWindow {
     private Category categoryUpdate;
     private ObservableList data;
     private TableView categoriesListTableView;
 
-    public CategoryUpdateFormWindow(Category category, ObservableList data, TableView categoriesListTableView){
+    public CategoryUpdateFormWindow(Category category, ObservableList data, TableView categoriesListTableView) {
         this.categoryUpdate = category;
         this.data = data;
         this.categoriesListTableView = categoriesListTableView;
@@ -37,5 +37,4 @@ public class CategoryUpdateFormWindow extends  CategoryAddFormWindow{
 
         });
     }
-
 }

@@ -12,7 +12,7 @@ public class Customer {
     private String lastName;
     private String tel;
     private String email;
-    private  String address;
+    private String address;
     private List<Sale> salesList = new ArrayList<>();
 
     public Customer(long id, String firstName, String lastName, String tel, String email, String address) {
@@ -32,7 +32,7 @@ public class Customer {
         this.address = address;
     }
 
-    public void addSale(Sale sale){
+    public void addSale(Sale sale) {
         salesList.add(sale);
     }
 
@@ -90,6 +90,6 @@ public class Customer {
 
     @Override
     public String toString() {
-        return firstName+" "+lastName;
+        return firstName + " " + lastName;
     }
 }

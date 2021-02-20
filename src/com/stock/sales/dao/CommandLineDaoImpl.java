@@ -6,7 +6,6 @@ import com.stock.product.dao.Category;
 import com.stock.product.dao.Product;
 
 
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,8 +27,6 @@ public class CommandLineDaoImpl extends AbstractDao implements ICommandLineDao {
             sqlException.printStackTrace();
         }
     }
-
-
 
     @Override
     public void delete(long id) {
@@ -69,9 +66,6 @@ public class CommandLineDaoImpl extends AbstractDao implements ICommandLineDao {
         Customer customer;
         Sale deliverySheet;
         Category category;
-
-
-
         String sql = "SELECT * FROM commandLine LEFT JOIN product ON commandLine.productId= product.id " +
                 "LEFT JOIN deliverySheet dS on dS.id = commandLine.deliverySheetId " +
                 "LEFT JOIN category c on c.id = product.categoryid " +
@@ -83,13 +77,11 @@ public class CommandLineDaoImpl extends AbstractDao implements ICommandLineDao {
             rs = pst.executeQuery();
             if (rs.next()) {
                 category = new Category(rs.getLong("categoryId"), rs.getString("title"));
-                product = new Product(rs.getLong("productId"), rs.getString("designation"), rs.getInt("quantity"), rs.getDouble("price"),  rs.getDate("date").toLocalDate(), category);
+                product = new Product(rs.getLong("productId"), rs.getString("designation"), rs.getInt("quantity"), rs.getDouble("price"), rs.getDate("date").toLocalDate(), category);
                 customer = new Customer(rs.getLong("customerId"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("tel"), rs.getString("email"), rs.getString("address"));
                 deliverySheet = new Sale(rs.getLong("deliverySheetId"), rs.getDate("deliveryDate").toLocalDate(), customer);
                 commandLine = new CommandLine(rs.getLong("commandLineId"), rs.getInt("commandQuantity"), deliverySheet, product);
-
             }
-
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
@@ -106,8 +98,6 @@ public class CommandLineDaoImpl extends AbstractDao implements ICommandLineDao {
         Product product;
         Customer customer;
         Category category;
-
-
         String sql = "SELECT * FROM commandLine LEFT JOIN product ON commandLine.productId= product.id " +
                 "LEFT JOIN deliverySheet dS on dS.id = commandLine.deliverySheetId " +
                 "LEFT JOIN category c on c.id = product.categoryid " +
@@ -118,7 +108,7 @@ public class CommandLineDaoImpl extends AbstractDao implements ICommandLineDao {
 
             while (rs.next()) {
                 category = new Category(rs.getLong("categoryId"), rs.getString("title"));
-                product = new Product(rs.getLong("productId"), rs.getString("designation"), rs.getInt("quantity"), rs.getDouble("price"),  rs.getDate("date").toLocalDate(), category);
+                product = new Product(rs.getLong("productId"), rs.getString("designation"), rs.getInt("quantity"), rs.getDouble("price"), rs.getDate("date").toLocalDate(), category);
                 customer = new Customer(rs.getLong("customerId"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("tel"), rs.getString("email"), rs.getString("address"));
                 deliverySheet = new Sale(rs.getLong("deliverySheetId"), rs.getDate("deliveryDate").toLocalDate(), customer);
                 commandLine = new CommandLine(rs.getLong("commandLineId"), rs.getInt("commandQuantity"), deliverySheet, product);
@@ -139,20 +129,17 @@ public class CommandLineDaoImpl extends AbstractDao implements ICommandLineDao {
         Product product;
         Customer customer;
         Category category;
-
-
         String sql = "SELECT * FROM commandLine LEFT JOIN product ON commandLine.productId= product.id " +
                 "LEFT JOIN deliverySheet dS on dS.id = commandLine.deliverySheetId " +
                 "LEFT JOIN category c on c.id = product.categoryid " +
                 "LEFT JOIN customer c2 on c2.id = dS.customerId where deliverySheetId = ?";
         try {
             pst = connection.prepareStatement(sql);
-            pst.setLong(1,deliverySheetId);
+            pst.setLong(1, deliverySheetId);
             rs = pst.executeQuery();
-
             while (rs.next()) {
                 category = new Category(rs.getLong("categoryId"), rs.getString("title"));
-                product = new Product(rs.getLong("productId"), rs.getString("designation"), rs.getInt("quantity"), rs.getDouble("price"),  rs.getDate("date").toLocalDate(), category);
+                product = new Product(rs.getLong("productId"), rs.getString("designation"), rs.getInt("quantity"), rs.getDouble("price"), rs.getDate("date").toLocalDate(), category);
                 customer = new Customer(rs.getLong("customerId"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("tel"), rs.getString("email"), rs.getString("address"));
                 deliverySheet = new Sale(rs.getLong("deliverySheetId"), rs.getDate("deliveryDate").toLocalDate(), customer);
                 commandLine = new CommandLine(rs.getLong("commandLineId"), rs.getInt("commandQuantity"), deliverySheet, product);
@@ -163,5 +150,4 @@ public class CommandLineDaoImpl extends AbstractDao implements ICommandLineDao {
         }
         return commandLines;
     }
-
 }

@@ -87,13 +87,11 @@ public class ProductDaoImpl extends AbstractDao implements IProductDao {
         ResultSet rs;
         Product product;
         Category category;
-
-
         String sql = "SELECT * FROM product LEFT JOIN category ON product.categoryId = category.id";
+
         try {
             pst = connection.prepareStatement(sql);
             rs = pst.executeQuery();
-
             while (rs.next()) {
                 category = new Category(rs.getLong("categoryId"), rs.getString("title"));
                 product = new Product(rs.getLong("id"), rs.getString("designation"), rs.getInt("quantity"), rs.getDouble("price"), rs.getDate("date").toLocalDate(), category);
@@ -112,7 +110,6 @@ public class ProductDaoImpl extends AbstractDao implements IProductDao {
         ResultSet rs;
         Product product;
         Category category;
-
         String sql = "SELECT * FROM product LEFT JOIN category ON product.categoryId = category.id where designation LIKE ?";
 
         try {
@@ -127,7 +124,6 @@ public class ProductDaoImpl extends AbstractDao implements IProductDao {
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-
         return products;
     }
 
@@ -138,8 +134,6 @@ public class ProductDaoImpl extends AbstractDao implements IProductDao {
         ResultSet rs;
         Product product;
         Category category;
-
-        /// String sql = "select * from product where designation LIKE ?";
         String sql = "SELECT * FROM product LEFT JOIN category ON product.categoryId = category.id where category.title = ?";
 
         try {
@@ -154,7 +148,6 @@ public class ProductDaoImpl extends AbstractDao implements IProductDao {
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-
         return products;
     }
 
@@ -165,8 +158,6 @@ public class ProductDaoImpl extends AbstractDao implements IProductDao {
         ResultSet rs;
         Product product;
         Category category;
-
-        /// String sql = "select * from product where designation LIKE ?";
         String sql = "SELECT * FROM product LEFT JOIN category ON product.categoryId = category.id where category.title = ? And product.designation LIKE ?";
 
         try {
@@ -182,11 +173,8 @@ public class ProductDaoImpl extends AbstractDao implements IProductDao {
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }
-
         return products;
     }
-
-
 }
 
 

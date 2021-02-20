@@ -4,11 +4,11 @@ import com.stock.sales.dao.Sale;
 
 import java.time.LocalDate;
 
-public class Cheque extends Payment{
+public class Cheque extends Payment {
     private int chequeNumber;
     private String owner;
     private String bank;
-    private  LocalDate deadline;
+    private LocalDate deadline;
 
     public Cheque(long id, double amount, LocalDate date, String type, Sale sale, int chequeNumber, String owner, String bank, LocalDate deadline) {
         super(id, amount, date, type, sale);
@@ -23,7 +23,7 @@ public class Cheque extends Payment{
         this.chequeNumber = chequeNumber;
         this.owner = owner;
         this.bank = bank;
-        this.deadline = this.deadline = deadline;
+        this.deadline = deadline;
     }
 
     public LocalDate getDeadline() {

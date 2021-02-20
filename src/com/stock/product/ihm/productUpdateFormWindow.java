@@ -1,17 +1,13 @@
 package com.stock.product.ihm;
 
-
 import com.stock.product.dao.Product;
 
-
-
 public class productUpdateFormWindow extends ProductAddFormWindow {
-
     private Product productUpdate;
     private String from;
     ProductsListHandler handler;
 
-    public productUpdateFormWindow(Product product, String from, ProductsListHandler handler){
+    public productUpdateFormWindow(Product product, String from, ProductsListHandler handler) {
         this.productUpdate = product;
         this.from = from;
         this.handler = handler;
@@ -23,7 +19,6 @@ public class productUpdateFormWindow extends ProductAddFormWindow {
         this.priceTextField.setText(String.valueOf(product.getPrice()));
         this.dateDatePicker.setValue(product.getDate());
     }
-
 
     @Override
     protected void addEvents() {
@@ -39,14 +34,10 @@ public class productUpdateFormWindow extends ProductAddFormWindow {
                         categoryChoiceBox.getSelectionModel().getSelectedItem()
                 );
                 productDAO.update(product);
-                if(from.equals("fromProduct")) handler.updateAllListProductsView();
-                else if(from != null) handler.updateListProductsViewByCategory(from);
-
+                if (from.equals("fromProduct")) handler.updateAllListProductsView();
+                else if (from != null) handler.updateListProductsViewByCategory(from);
                 window.close();
             }
-
         });
     }
-
-
 }

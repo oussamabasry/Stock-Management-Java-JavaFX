@@ -4,12 +4,11 @@ import com.stock.customer.dao.Customer;
 
 
 public class CustomerUpdateFormWindow extends CustomerAddFormWindow {
-
     private Customer customerUpdate;
     private CustomerListHandler handler;
 
-    public CustomerUpdateFormWindow(Customer customer, CustomerListHandler handler){
-        this.customerUpdate= customer;
+    public CustomerUpdateFormWindow(Customer customer, CustomerListHandler handler) {
+        this.customerUpdate = customer;
         this.handler = handler;
         this.titleLabel.setText("Update customer");
         this.window.setTitle("Update customer");
@@ -20,7 +19,6 @@ public class CustomerUpdateFormWindow extends CustomerAddFormWindow {
         this.emailTextField.setText(customer.getEmail());
         this.addressTextField.setText(customer.getAddress());
     }
-
 
     @Override
     protected void addEvents() {
@@ -39,7 +37,6 @@ public class CustomerUpdateFormWindow extends CustomerAddFormWindow {
                 handler.updateListCustomersView();
                 window.close();
             }
-
         });
     }
 }

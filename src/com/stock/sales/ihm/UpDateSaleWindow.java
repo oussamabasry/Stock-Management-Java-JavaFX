@@ -14,14 +14,12 @@ import javafx.stage.Stage;
 
 
 public class UpDateSaleWindow {
-
-   protected UpDateSaleHandler handler = new UpDateSaleHandler(this);
-   protected SaleManagementHandler saleManagementHandler;
+    protected UpDateSaleHandler handler = new UpDateSaleHandler(this);
+    protected SaleManagementHandler saleManagementHandler;
     protected VBox root = new VBox();
     protected Scene scene = new Scene(root);
     protected Stage window = new Stage();
     protected Label titleLabel = new Label("  Up Date BL");
-
     protected Label customerLabel = new Label("Customer");
     protected ChoiceBox<Customer> customerChoiceBox = new ChoiceBox<>();
     protected Label dateLabel = new Label("Date:");
@@ -32,14 +30,11 @@ public class UpDateSaleWindow {
     protected ObservableList<Customer> customers = FXCollections.observableArrayList();
     protected Sale sale;
 
-
-
     protected void initWindow() {
         window.setScene(scene);
         window.setWidth(500);
         window.setHeight(330);
         window.setTitle("Up Date BL");
-
     }
 
     protected void addNodesToWindow() {
@@ -68,12 +63,11 @@ public class UpDateSaleWindow {
         cancelButton.setOnAction(event -> window.close());
         confirmButton.setOnAction(event -> {
             handler.updateBl();
-
         });
 
     }
 
-    protected void addItemsToChoiceBox(){
+    protected void addItemsToChoiceBox() {
         handler.updateChoiceBoxCustomers();
     }
 

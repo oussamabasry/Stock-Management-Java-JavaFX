@@ -13,7 +13,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class CategoryAddFormWindow {
-
     protected ICategoryDao categoryDao = new CategoryDaoImpl();
     protected VBox root = new VBox();
     protected Scene scene = new Scene(root);
@@ -24,7 +23,6 @@ public class CategoryAddFormWindow {
     protected HBox buttonsBox = new HBox();
     protected Button categoryConfirmButton = new Button("Add");
     protected Button categoryCancelButton = new Button("Cancel");
-
 
     protected void initWindow() {
         window.setScene(scene);
@@ -63,11 +61,7 @@ public class CategoryAddFormWindow {
                 categoryDao.add(category);
                 window.close();
             }
-
         });
-      /*  window.setOnCloseRequest(event -> {
-            event.consume();
-        });*/
     }
 
     public CategoryAddFormWindow() {

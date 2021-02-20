@@ -32,16 +32,17 @@ public class Product {
         this.price = price;
         this.date = date;
         this.category = category;
-        this.total= quantity * price;
+        this.total = quantity * price;
     }
 
-    public void addCommandLine(CommandLine commandLine){
+    public void addCommandLine(CommandLine commandLine) {
         commandLines.add(commandLine);
     }
 
     public Category getCategory() {
         return category;
     }
+
     public void setCategory(Category category) {
         this.category = category;
     }
@@ -50,26 +51,21 @@ public class Product {
         return total;
     }
 
-
     public long getId() {
         return id;
     }
-
 
     public String getDesignation() {
         return designation;
     }
 
-
     public int getQuantity() {
         return quantity;
     }
 
-
     public double getPrice() {
         return price;
     }
-
 
     public LocalDate getDate() {
         return date;

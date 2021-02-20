@@ -38,8 +38,7 @@ public class CustomerListWindow {
     protected TableColumn<Customer, String> telColumn = new TableColumn<>("Tel");
     protected TableColumn<Customer, String> emailColumn = new TableColumn<>("Email");
     protected TableColumn<Customer, String> addressColumn = new TableColumn<>("Address");
-    protected ObservableList<Customer> customerObservablesList =  FXCollections.observableArrayList();
-
+    protected ObservableList<Customer> customerObservablesList = FXCollections.observableArrayList();
 
     protected void initWindow() {
         window.setScene(scene);
@@ -59,7 +58,8 @@ public class CustomerListWindow {
         numberHBox.getChildren().addAll(numberLabel, numberValueLabel);
         root.getChildren().add(numberHBox);
     }
-    protected   void addColumnToTableview(){
+
+    protected void addColumnToTableview() {
         customerTableView.getColumns().addAll(
                 idColumn,
                 firstNameColumn,
@@ -70,6 +70,7 @@ public class CustomerListWindow {
         );
         customerTableView.setItems(customerObservablesList);
     }
+
     protected void addStylesToNodes() {
         scene.getStylesheets().add("css/styles.css");
         titleLabel.getStyleClass().add("labelTitle");
@@ -86,31 +87,26 @@ public class CustomerListWindow {
     }
 
     protected void addEvents() {
-
         searchCustomerButton.setOnAction(event -> {
             if (!searchCustomerTextField.getText().isEmpty()) {
                 handler.updateCustomerByKeyword(searchCustomerTextField.getText());
             }
         });
-
-       displayAllCustomersButton.setOnAction(event -> handler.updateListCustomersView());
-
+        displayAllCustomersButton.setOnAction(event -> handler.updateListCustomersView());
         deleteCustomerButton.setOnAction(event -> {
             Customer customer = customerTableView.getSelectionModel().getSelectedItem();
-            if(customer != null) {
+            if (customer != null) {
                 customerDao.delete(customer.getId());
-                  handler.updateListCustomersView();
+                handler.updateListCustomersView();
             }
         });
-
         upDateCustomerButton.setOnAction(event -> {
             Customer customer = customerTableView.getSelectionModel().getSelectedItem();
-            if(customer != null) {
-                 new CustomerUpdateFormWindow(customer, handler);
+            if (customer != null) {
+                new CustomerUpdateFormWindow(customer, handler);
             }
         });
     }
-
 
     public void configTableView() {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -137,7 +133,5 @@ public class CustomerListWindow {
         addEvents();
         window.show();
     }
-
-
 }
 

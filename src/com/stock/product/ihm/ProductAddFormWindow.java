@@ -15,7 +15,7 @@ public class ProductAddFormWindow {
     protected ICategoryDao categoryDao = new CategoryDaoImpl();
     protected ProductsListWindow productsListWindow = ProductsListHandler.getListHandler();
     protected ProductsAddAndUpdateHandler handler = new ProductsAddAndUpdateHandler(this);
-    protected  VBox root = new VBox();
+    protected VBox root = new VBox();
     protected Scene scene = new Scene(root);
     protected Stage window = new Stage();
     protected Label titleLabel = new Label("  New Product");
@@ -26,7 +26,7 @@ public class ProductAddFormWindow {
     protected Label quantityLabel = new Label("Quantity:");
     protected TextField quantityTextField = new TextField();
     protected Label categoryLabel = new Label("Category");
-    protected ChoiceBox <Category> categoryChoiceBox = new ChoiceBox<>();
+    protected ChoiceBox<Category> categoryChoiceBox = new ChoiceBox<>();
     protected Label dateLabel = new Label("Date:");
     protected DatePicker dateDatePicker = new DatePicker();
     protected HBox buttonsBox = new HBox();
@@ -34,7 +34,6 @@ public class ProductAddFormWindow {
     protected Button cancelButton = new Button("Cancel");
     protected ObservableList<Category> categories = FXCollections.observableArrayList();
     protected ObservableList<Product> productObservableList = FXCollections.observableArrayList();
-
 
     protected void initWindow() {
         window.setScene(scene);
@@ -76,15 +75,12 @@ public class ProductAddFormWindow {
     protected void addEvents() {
         cancelButton.setOnAction(event -> window.close());
         confirmButton.setOnAction(event -> {
-          handler.addProduct();
+            handler.addProduct();
 
         });
-      /*  window.setOnCloseRequest(event -> {
-            event.consume();
-        });*/
     }
 
-    protected void addItemsToChoiceBox(){
+    protected void addItemsToChoiceBox() {
         handler.updateChoiceBoxCategories();
         categoryChoiceBox.setItems(categories);
         categoryChoiceBox.setValue(categories.get(0));

@@ -11,7 +11,7 @@ public class SingleConnection {
     private String url = "jdbc:mysql://localhost:3306/" + dbName;
     private static Connection connection = null;
 
-    private  SingleConnection(){
+    private SingleConnection() {
         try {
             connection = DriverManager.getConnection(url, dataBaseUser, dataBasePassword);
         } catch (SQLException sqlException) {
@@ -19,9 +19,8 @@ public class SingleConnection {
         }
     }
 
-    public static Connection getConnection(){
-        if(connection == null)  new SingleConnection();
+    public static Connection getConnection() {
+        if (connection == null) new SingleConnection();
         return connection;
     }
-
 }

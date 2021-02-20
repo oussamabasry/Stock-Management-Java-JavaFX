@@ -8,13 +8,12 @@ import com.stock.customer.dao.ICustomerDao;
 public class CustomerAddHandler {
     CustomerAddFormWindow customerAddFormWindow = null;
 
-    public CustomerAddHandler(CustomerAddFormWindow customerAddFormWindow){
+    public CustomerAddHandler(CustomerAddFormWindow customerAddFormWindow) {
         this.customerAddFormWindow = customerAddFormWindow;
     }
 
-    public void addCustomer(Customer customer){
+    public void addCustomer(Customer customer) {
         ICustomerDao customerDao = new CustomerDaoImpl();
         customerDao.add(customer);
     }
-
 }

@@ -37,8 +37,7 @@ public class SaleHomeWindow {
     protected TableColumn<Customer, String> telColumn = new TableColumn<>("Tel");
     protected TableColumn<Customer, String> emailColumn = new TableColumn<>("Email");
     protected TableColumn<Customer, String> addressColumn = new TableColumn<>("Address");
-    protected ObservableList<Customer> customerObservablesList =  FXCollections.observableArrayList();
-
+    protected ObservableList<Customer> customerObservablesList = FXCollections.observableArrayList();
 
     protected void initWindow() {
         window.setScene(scene);
@@ -58,7 +57,8 @@ public class SaleHomeWindow {
         numberHBox.getChildren().addAll(numberLabel, numberValueLabel);
         root.getChildren().add(numberHBox);
     }
-    protected   void addColumnToTableview(){
+
+    protected void addColumnToTableview() {
         customerTableView.getColumns().addAll(
                 idColumn,
                 firstNameColumn,
@@ -69,6 +69,7 @@ public class SaleHomeWindow {
         );
         customerTableView.setItems(customerObservablesList);
     }
+
     protected void addStylesToNodes() {
         scene.getStylesheets().add("css/styles.css");
         titleLabel.getStyleClass().add("labelTitle");
@@ -85,23 +86,16 @@ public class SaleHomeWindow {
     }
 
     protected void addEvents() {
-
         searchCustomerButton.setOnAction(event -> {
             if (!searchCustomerTextField.getText().isEmpty()) {
                 handler.updateCustomerByKeyword(searchCustomerTextField.getText());
             }
         });
-
         displayAllCustomersButton.setOnAction(event -> handler.updateListCustomersView());
-
         addBlButton.setOnAction(event -> {
             handler.addBl();
         });
-
-
-
     }
-
 
     public void configTableView() {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -128,5 +122,4 @@ public class SaleHomeWindow {
         addEvents();
         window.show();
     }
-
 }

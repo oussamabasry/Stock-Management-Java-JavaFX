@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ProductsListWindow {
-    protected  IProductDao productDAO = new ProductDaoImpl();
+    protected IProductDao productDAO = new ProductDaoImpl();
     protected ProductsListHandler handler = new ProductsListHandler(this);
     protected VBox root = new VBox();
     protected HBox searchProductsHBox = new HBox();
@@ -46,8 +46,7 @@ public class ProductsListWindow {
     protected TableColumn<Product, String> categoryColumn = new TableColumn<>("Category");
     protected TableColumn<Product, LocalDate> dateColumn = new TableColumn<>("Date");
     protected TableColumn<Product, Double> totalColumn = new TableColumn<>("Total");
-    protected ObservableList<Product> productsObservablesList =  FXCollections.observableArrayList();
-
+    protected ObservableList<Product> productsObservablesList = FXCollections.observableArrayList();
 
     protected void initWindow() {
         window.setScene(scene);
@@ -68,8 +67,7 @@ public class ProductsListWindow {
         root.getChildren().add(totalHBox);
     }
 
-
-    protected   void addColumnToTableview(){
+    protected void addColumnToTableview() {
         productsTableView.getColumns().addAll(
                 idColumn,
                 designationColumn,
@@ -78,11 +76,9 @@ public class ProductsListWindow {
                 categoryColumn,
                 totalColumn,
                 dateColumn
-
         );
         productsTableView.setItems(productsObservablesList);
     }
-
 
     protected void addStylesToNodes() {
         scene.getStylesheets().add("css/styles.css");
@@ -100,49 +96,43 @@ public class ProductsListWindow {
     }
 
     protected void addEvents() {
-
         searchProductButton.setOnAction(event -> {
             if (!searchProductTextField.getText().isEmpty()) {
-              //  productsObservablesList = FXCollections.observableArrayList(productDAO.getAll(searchProductTextField.getText()));
-              //  productsTableView.setItems(productsObservablesList);
                 handler.updateListProductsViewByKeyword(searchProductTextField.getText());
             }
         });
         displayAllProductsButton.setOnAction(event -> handler.updateAllListProductsView());
         deleteProductsButton.setOnAction(event -> {
             Product product = productsTableView.getSelectionModel().getSelectedItem();
-            if(product != null) {
+            if (product != null) {
                 productDAO.delete(product.getId());
                 handler.updateAllListProductsView();
             }
         });
         upDateProductsButton.setOnAction(event -> {
             Product product = productsTableView.getSelectionModel().getSelectedItem();
-            if(product != null)
-                 new productUpdateFormWindow(product,"fromProduct", handler);
+            if (product != null)
+                new productUpdateFormWindow(product, "fromProduct", handler);
         });
     }
 
 
     public void configTableView() {
-
         idColumn.setCellValueFactory(new PropertyValueFactory<Product, Long>("id"));
         idColumn.setPrefWidth(100);
-        designationColumn.setCellValueFactory(new PropertyValueFactory<Product,String>("designation"));
+        designationColumn.setCellValueFactory(new PropertyValueFactory<Product, String>("designation"));
         designationColumn.setPrefWidth(250);
         quantityColumn.setCellValueFactory(new PropertyValueFactory<Product, Integer>("quantity"));
         quantityColumn.setPrefWidth(125);
         priceColumn.setCellValueFactory(new PropertyValueFactory<Product, Double>("price"));
         priceColumn.setPrefWidth(125);
-        categoryColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Product , String>, ObservableValue<String>>() {
-
+        categoryColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Product, String>, ObservableValue<String>>() {
             @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Product , String> param) {
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Product, String> param) {
                 return new SimpleObjectProperty<>(param.getValue().getCategory().getTitle());
 
             }
         });
-
         categoryColumn.setPrefWidth(100);
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         dateColumn.setPrefWidth(120);
@@ -160,7 +150,5 @@ public class ProductsListWindow {
         addEvents();
         window.show();
     }
-
-
 }
 

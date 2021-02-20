@@ -27,18 +27,22 @@ public class Sale {
         this.customer = customer;
         calculTotal();
     }
+
     public Sale() {
     }
-    public  void addCommandLine(CommandLine commandLine){
+
+    public void addCommandLine(CommandLine commandLine) {
         commandLines.add(commandLine);
     }
-    public  void deleteCommandLine(CommandLine commandLine){
+
+    public void deleteCommandLine(CommandLine commandLine) {
         commandLines.remove(commandLine);
     }
-    private  void calculTotal(){
+
+    private void calculTotal() {
         total = 0;
         for (CommandLine c : commandLines)
-            total+= c.getSubtotal();
+            total += c.getSubtotal();
     }
 
     public void setDate(LocalDate date) {

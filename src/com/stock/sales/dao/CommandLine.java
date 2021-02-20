@@ -5,7 +5,7 @@ import com.stock.product.dao.Product;
 public class CommandLine {
     private long id;
     private int quantity;
-    private  double subtotal;
+    private double subtotal;
     private Sale sale;
     private Product product;
 
@@ -14,7 +14,7 @@ public class CommandLine {
         this.quantity = quantity;
         this.sale = sale;
         this.product = product;
-        this.subtotal = product.getPrice()*quantity;
+        this.subtotal = product.getPrice() * quantity;
     }
 
     public CommandLine(int quantity, Sale sale, Product product) {
@@ -22,7 +22,7 @@ public class CommandLine {
         this.quantity = quantity;
         this.sale = sale;
         this.product = product;
-        this.subtotal = product.getPrice()*quantity;
+        this.subtotal = product.getPrice() * quantity;
     }
 
     public double getSubtotal() {
@@ -65,7 +65,8 @@ public class CommandLine {
     public void setProduct(Product product) {
         this.product = product;
     }
-    private  void calculateTotal(){
-        this.subtotal = product.getPrice()*quantity;
+
+    private void calculateTotal() {
+        this.subtotal = product.getPrice() * quantity;
     }
 }
